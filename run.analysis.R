@@ -1,4 +1,5 @@
 
+
 ## First I have to download the dataset:
 if(!file.exists("./data")){dir.create("./data")}
 fileUrl <- "https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip"
@@ -35,6 +36,12 @@ str(dataFeaturesTrain)
 dataSubject <- rbind(dataSubjectTrain, dataSubjectTest)
 dataActivity<- rbind(dataActivityTrain, dataActivityTest)
 dataFeatures<- rbind(dataFeaturesTrain, dataFeaturesTest)
+
+##almost forgot! (correction) - I have to add names for the variables
+names(dataSubject)<-c("subject")
+names(dataActivity)<- c("activity")
+dataFeaturesNames <- read.table(file.path(path_rf, "features.txt"),head=FALSE)
+names(dataFeatures)<- dataFeaturesNames$V2
 
 ##Next I have to name each varible so I can run reports easily
 dataCombine <- cbind(dataSubject, dataActivity)
